@@ -1,0 +1,34 @@
+CREATE TABLE noteEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    aimsAndObjectives TEXT NOT NULL,
+    outcrop TEXT NOT NULL,
+    geographicalHistory TEXT NOT NULL,
+    conclusion TEXT NOT NULL,
+    created INTEGER NOT NULL
+);
+
+getAllNotes:
+SELECT *
+FROM noteEntity;
+
+getNoteById:
+SELECT *
+FROM noteEntity
+WHERE id = ?;
+
+insertNote:
+INSERT OR REPLACE
+INTO noteEntity(
+    id,
+    title,
+    aimsAndObjectives ,
+    outcrop ,
+    geographicalHistory ,
+    conclusion ,
+    created
+) VALUES( ?, ?, ?, ?, ?, ?, ? );
+
+deleteNoteById:
+DELETE FROM noteEntity
+WHERE id = ?;
