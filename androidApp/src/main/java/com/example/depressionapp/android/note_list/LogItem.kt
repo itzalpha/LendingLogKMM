@@ -22,24 +22,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.depressionapp.domain.note.ReportNote
+import com.example.depressionapp.domain.log.Logs
 import com.example.depressionapp.domain.time.DateTimeUtil
 
 @Composable
 fun NoteItem(
     context: Context = LocalContext.current,
-    reportNote: ReportNote,
+    logs: Logs,
     onNoteClick: () -> Unit,
     onDeleteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val formattedDate = remember(reportNote.created) {
-        DateTimeUtil.formatNoteDate(reportNote.created)
+    val formattedDate = remember(logs.created) {
+        DateTimeUtil.formatNoteDate(logs.created)
     }
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .background(Color.DarkGray , RectangleShape)
+            .background(Color.Gray , RectangleShape)
             .clickable { onNoteClick() }
             .padding(16.dp)
     ) {
@@ -54,11 +54,11 @@ fun NoteItem(
             )
             Icon(
                 imageVector = Icons.Default.Close,
-                contentDescription = "Delete note",
+                contentDescription = "Delete Log",
                 modifier = Modifier
                     .clickable(MutableInteractionSource(), null) {
                         val builder = AlertDialog.Builder(context)
-                        builder.setMessage("Are You Sure You Want To Delete This Report Note")
+                        builder.setMessage("Are You Sure You Want To Delete This Log\nHas the borrowed Item been returned")
                             .setCancelable(false)
                             .setPositiveButton("Yes") { _, _ ->
                                 onDeleteClick()
@@ -74,10 +74,11 @@ fun NoteItem(
         }
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Project Name : ${reportNote.title}",
+            text = "Object Lent : ${logs.objectLent}",
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp
         )
+        Spacer(modifier = Modifier.height(4.dp))
 
     }
 

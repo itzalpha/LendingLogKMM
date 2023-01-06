@@ -38,7 +38,7 @@ fun SearchProjectName(
                 value = text,
                 onValueChange = onTextChange,
                 shape = RoundedCornerShape(50.dp),
-                placeholder = { Text(text = "Project Name") },
+                placeholder = { Text(text = "search object lent & borrower") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)

@@ -24,7 +24,7 @@ import com.example.depressionapp.android.R
 fun NoteDetailScreen(
     noteId: Long,
     navController: NavController,
-    viewModel: NoteDetailViewModel = hiltViewModel()
+    viewModel: LogItemsDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     val hasNoteBeenSaved by viewModel.hasNoteBeenSaved.collectAsState()
@@ -45,7 +45,7 @@ fun NoteDetailScreen(
                     imageVector = ImageVector.vectorResource(id =
                     R.drawable.ic_baseline_save_24
                     ),
-                    contentDescription = "Save note",
+                    contentDescription = "Save Log",
                     tint = Color.White
                 )
             }
@@ -61,15 +61,15 @@ fun NoteDetailScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Project Name ",
+                text = "Name Of Borrower ",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
             TransparentHintTextField(
-                text = state.noteTitle,
-                onValueChanged = viewModel::onNoteTitleChanged,
+                text = state.name,
+                onValueChanged = viewModel::onNameChanged,
                 onFocusChanged = {
-                    viewModel.onNoteTitleFocusChanged(it.isFocused)
+                    viewModel.onNameFocusChanged(it.isFocused)
                 },
                 singleLine = false,
                 textStyle = TextStyle(fontSize = 18.sp)
@@ -78,15 +78,15 @@ fun NoteDetailScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Aims & Objectives & Methodology ",
+                text = "Object Lent ",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
             TransparentHintTextField(
-                text = state.noteAimsAndObjectives,
-                onValueChanged = viewModel::onNoteAimsAndObjectivesChanged,
+                text = state.objectLent,
+                onValueChanged = viewModel::onObjectLentChanged,
                 onFocusChanged = {
-                    viewModel.onNoteAimsAndObjectivesFocusChanged(it.isFocused)
+                    viewModel.onObjectLentFocusChanged(it.isFocused)
                 },
                 singleLine = false,
                 textStyle = TextStyle(fontSize = 18.sp)
@@ -95,49 +95,15 @@ fun NoteDetailScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Introduction & General Geology ",
+                text = "Borrower Contact",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
             TransparentHintTextField(
-                text = state.noteGeographicalHistory,
-                onValueChanged = viewModel::onNoteGeographicalHistoryChanged,
+                text = state.time,
+                onValueChanged = viewModel::onTimeChanged,
                 onFocusChanged = {
-                    viewModel.onNoteGeographicalHistoryFocusChanged(it.isFocused)
-                },
-                singleLine = false,
-                textStyle = TextStyle(fontSize = 18.sp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            Text(
-                text = "Geology Of The Study Area ",
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp
-            )
-            TransparentHintTextField(
-                text = state.noteOutcrop,
-                onValueChanged = viewModel::onNoteOutcropChanged,
-                onFocusChanged = {
-                    viewModel.onNoteOutcropFocusChanged(it.isFocused)
-                },
-                singleLine = false,
-                textStyle = TextStyle(fontSize = 18.sp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            Text(
-                text = "Conclusion",
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp
-            )
-            TransparentHintTextField(
-                text = state.noteConclusion,
-             onValueChanged = viewModel::onNoteConclusionChanged,
-                onFocusChanged = {
-                    viewModel.onNoteConclusionFocusChanged(it.isFocused)
+                    viewModel.onTimeFocusChanged(it.isFocused)
                 },
                 singleLine = false,
                 textStyle = TextStyle(fontSize = 18.sp)

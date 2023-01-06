@@ -26,14 +26,14 @@ import androidx.navigation.NavController
 @Composable
 fun NoteListScreen(
     navController: NavController,
-    viewModel: NoteListViewModel = hiltViewModel()
+    viewModel: LogListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     LaunchedEffect(key1 = true) {
-        viewModel.loadNotes()
+        viewModel.loadLogs()
     }
 
-    Scaffold() { padding ->
+    Scaffold { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -59,7 +59,7 @@ fun NoteListScreen(
                     exit = fadeOut()
                 ) {
                     Text(
-                        text = "Geo Survey Note",
+                        text = "Lending Log",
                         fontWeight = FontWeight.Bold,
                         fontSize = 25.sp
                     )
@@ -73,11 +73,11 @@ fun NoteListScreen(
                 ) {
 
                     IconButton(onClick = {
-                        navController.navigate("note_detail/-1L")
+                        navController.navigate("log_detail/-1L")
                     } ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Add New Note"
+                            contentDescription = "Add Log"
                         )
                     }
                 }
@@ -86,13 +86,13 @@ fun NoteListScreen(
                 modifier = Modifier.weight(1f)
             ) {
                 items(
-                    items = state.reportNotes,
+                    items = state.logs,
                     key = { it.id!! }
                 ) { note ->
                     NoteItem(
-                        reportNote = note,
+                        logs = note,
                        onNoteClick = {
-                            navController.navigate("note_detail/${note.id}")
+                            navController.navigate("log_detail/${note.id}")
                         },
                         onDeleteClick = {
                             viewModel.deleteNoteById(note.id!!)

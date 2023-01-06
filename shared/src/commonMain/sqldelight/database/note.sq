@@ -1,34 +1,30 @@
-CREATE TABLE noteEntity(
+CREATE TABLE logEntity(
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    aimsAndObjectives TEXT NOT NULL,
-    outcrop TEXT NOT NULL,
-    geographicalHistory TEXT NOT NULL,
-    conclusion TEXT NOT NULL,
+    name TEXT NOT NULL,
+    objectLent TEXT NOT NULL,
+    time TEXT NOT NULL,
     created INTEGER NOT NULL
 );
 
-getAllNotes:
-SELECT *
-FROM noteEntity;
+insertLog:
+INSERT OR REPLACE
+INTO logEntity(
+    id,
+    name,
+    objectLent ,
+    time ,
+    created
+) VALUES( ?, ?, ?, ?, ? );
 
-getNoteById:
+getLogById:
 SELECT *
-FROM noteEntity
+FROM logEntity
 WHERE id = ?;
 
-insertNote:
-INSERT OR REPLACE
-INTO noteEntity(
-    id,
-    title,
-    aimsAndObjectives ,
-    outcrop ,
-    geographicalHistory ,
-    conclusion ,
-    created
-) VALUES( ?, ?, ?, ?, ?, ?, ? );
+getAllLogs:
+SELECT *
+FROM logEntity;
 
-deleteNoteById:
-DELETE FROM noteEntity
+deleteLogById:
+DELETE FROM logEntity
 WHERE id = ?;

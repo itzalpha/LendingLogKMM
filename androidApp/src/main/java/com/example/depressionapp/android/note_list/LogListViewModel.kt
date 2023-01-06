@@ -9,31 +9,31 @@ import javax.inject.Inject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.depressionapp.domain.note.NoteDataSource
-import com.example.depressionapp.domain.note.ReportNote
-import com.example.depressionapp.domain.note.SearchNotes
+import com.example.depressionapp.domain.log.LogDataSource
+import com.example.depressionapp.domain.log.Logs
+import com.example.depressionapp.domain.log.SearchLog
 
 @HiltViewModel
-class NoteListViewModel @Inject constructor(
-    private val noteDataSource: NoteDataSource,
+class LogListViewModel @Inject constructor(
+    private val logDataSource: LogDataSource,
     private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
-    private val searchNotes = SearchNotes()
-    private val notes = savedStateHandle.getStateFlow("notes", emptyList<ReportNote>())
+    private val searchLog = SearchLog()
+    private val notes = savedStateHandle.getStateFlow("logs", emptyList<Logs>())
     private val searchText = savedStateHandle.getStateFlow("searchText", "")
     private val isSearchActive = savedStateHandle.getStateFlow("isSearchActive", false)
 
     val state = combine(notes, searchText, isSearchActive) { notes, searchText, isSearchActive ->
-        NoteListState(
-            reportNotes = searchNotes.execute(notes, searchText),
+        LogListState(
+            logs = searchLog.execute(notes, searchText),
             searchText = searchText,
             isSearchActive = isSearchActive
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), NoteListState())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), LogListState())
 
-    fun loadNotes() {
+    fun loadLogs() {
         viewModelScope.launch {
-            savedStateHandle["notes"] = noteDataSource.getAllNotes()
+            savedStateHandle["logs"] = logDataSource.getAllLogs()
         }
     }
 
@@ -50,8 +50,8 @@ class NoteListViewModel @Inject constructor(
 
     fun deleteNoteById(id: Long) {
         viewModelScope.launch {
-            noteDataSource.deleteNoteById(id)
-            loadNotes()
+            logDataSource.deleteLogById(id)
+            loadLogs()
         }
     }
 }
