@@ -1,24 +1,32 @@
+//
+//  LogListScreen.swift
+//  iosApp
+//
+//  Created by Abu Yazeed on 09/01/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
 import SwiftUI
 import shared
 
 struct LogListScreen: View {
     private var logDataSource: LogDataSource
     @StateObject var viewModel = LogListViewModel(logDataSource: nil)
-    
+
     @State private var isLogSelected = false
     @State private var selectedLogId: Int64? = nil
-    
+
     init(logDataSource: LogDataSource) {
         self.logDataSource = logDataSource
     }
-    
+
     var body: some View {
         VStack {
             ZStack {
                 NavigationLink(destination: LogDetailScreen(logDataSource: self.logDataSource, logId: selectedLogId), isActive: $isLogSelected) {
                     EmptyView()
                 }.hidden()
-                HideableSearchTextField<LogDetailScreen>(onSearchToggled: {
+                SearchBar<LogDetailScreen>(onSearchToggled: {
                     viewModel.toggleIsSearchActive()
                 }, destinationProvider: {
                     LogDetailScreen(
@@ -28,13 +36,13 @@ struct LogListScreen: View {
                 }, isSearchActive: viewModel.isSearchActive, searchText: $viewModel.searchText)
                 .frame(maxWidth: .infinity, minHeight: 40)
                 .padding()
-                
+
                 if !viewModel.isSearchActive {
-                    Text("All logs")
+                    Text("Lending Log")
                         .font(.title2)
                 }
             }
-            
+
             List {
                 ForEach(viewModel.filteredLogs, id: \.self.id) { log in
                     Button(action: {

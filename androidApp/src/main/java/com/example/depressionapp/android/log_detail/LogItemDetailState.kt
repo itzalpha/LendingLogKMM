@@ -1,4 +1,4 @@
-package com.example.depressionapp.android.note_detail
+package com.example.depressionapp.android.log_detail
 
 data class LogItemDetailState(
       val name: String = "",

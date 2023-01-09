@@ -3,14 +3,14 @@ import shared
 
 @main
 struct iOSApp: App {
-    
-    private let databaseModule = DatabaseModule()
-    
-	var body: some Scene {
-		WindowGroup {
+   
+    private let databaseModule = databaseModule()
+    var body: some Scene{
+
+        WindowGroup {
             NavigationView {
-                NoteListScreen(logDataSource: databaseModule.logDataSource)
+                LogListScreen(logDataSource: databaseModule.logDataSource)
             }.accentColor(.black)
-		}
+        }
 	}
 }

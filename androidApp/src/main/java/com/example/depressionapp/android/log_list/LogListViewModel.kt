@@ -1,4 +1,4 @@
-package com.example.depressionapp.android.note_list
+package com.example.depressionapp.android.log_list
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted

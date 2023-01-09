@@ -1,4 +1,4 @@
-package com.example.depressionapp.android.note_detail
+package com.example.depressionapp.android.log_detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState

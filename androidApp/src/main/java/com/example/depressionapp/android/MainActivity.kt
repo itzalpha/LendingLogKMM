@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.depressionapp.android.note_detail.NoteDetailScreen
-import com.example.depressionapp.android.note_list.NoteListScreen
+import com.example.depressionapp.android.log_detail.NoteDetailScreen
+import com.example.depressionapp.android.log_list.NoteListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 
